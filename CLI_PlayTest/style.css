@@ -1,0 +1,15 @@
+*{
+    padding: 0;
+    margin:0;
+    vertical-align: baseline;
+    list-style: none;
+    border: 0;
+    background: #0F0F0F;
+    color: #F0F0F0;
+    font-family: 'Cascadia Mono', monospace;
+}
+
+input{
+    width: 100%;
+    height: 2rem;
+}
