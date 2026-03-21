@@ -9,9 +9,10 @@
     font-family: 'Cascadia Mono', monospace;
 }
 
-input{
+#input{
     width: 100%;
     height: 2rem;
+    margin-top: 10px;
 }
 
 #output{

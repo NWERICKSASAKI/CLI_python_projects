@@ -1,18 +1,14 @@
+'''
+Para testar direto no VSCode o código main.py e poder debugar por aqui
+Porque tentar testar e debugar direto pelo pyodide não é dada intuitivo
+'''
+
 import main
 import re
-# Para DEBUGAR ~~~ pq só rodar no navegador (pyodide) é impossível
 
 def converter_html_str(output):
     output = re.sub('</br>','\n',output)
     return re.sub('<.*?>','',output)
-
-# def args(*args):
-#     print(list(*args))
-
-# if __name__ == '__main__':
-#     args('oi')
-#     args('a','e')
-#     args(['a','o'])
 
 if __name__ == '__main__':
     print(converter_html_str(main.init()))
