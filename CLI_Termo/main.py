@@ -71,6 +71,7 @@ class Termo:
 
     def exibir_tela(self):
         self.output_str = ''
+        self.print("- TERMO -", end='</br></br>')
         for palavra in self.exibicao:
             # self.print(palavra, insert_tag=False)
             for letra in palavra:

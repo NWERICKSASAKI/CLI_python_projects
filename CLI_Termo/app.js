@@ -24,6 +24,8 @@ async function init() {
 
     response = await pyodide.runPython(`init()`);
     await to_output(response);
+    input.removeAttribute("disabled");
+    input.focus();
 }
 
 async function enviar(){
@@ -42,9 +44,10 @@ init();
 
 document.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
-    enviar();
-    input.value = ""
+        enviar();
+        input.value = ""
     }
+    input.focus();
 });
 
 // py -m http.server

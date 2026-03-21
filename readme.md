@@ -6,11 +6,11 @@
 
 💡 Pesquisei e descobri que através de HTML, javascript posso integrar com o **pyodide** e rodar tudo no GitHub Pages e resolvi aceitar o desafio de adaptar meus mini-games e programas de terminal para ser acessados no navegador, simulando o CLI.  
 
-## O código atual
+## Como funciona
 
 ⚙️ Tudo funciona numa página estática HTML + JS + CSS, usando o pyodide ele interpreta o meu código python e roda as funções isoladamentes a cada `ENTER` que dou no programa e interpreta o `input` e retorna o resultado do python (adaptado em uma string com elementos HTML para renderizar).  
 
-😓 Porém eu fui estudando um pouco mais do **pyodide** e seus potenciais eu acabei divergindo do meu objetivo original de só rodar meus programas e acabei criando este simulador de CLI em Python -> [/CLI_PlayTest](CLI_PlayTest)
+😓 Porém eu fui estudando um pouco mais do **pyodide** e seus potenciais eu acabei divergindo do meu objetivo original de só rodar meus programas e acabei criando este simulador de CLI em Python → [CLI_PlayTest](/CLI_PlayTest)
 
 ## Adaptando para meus outros programas
 
@@ -23,11 +23,23 @@ Boa parte das lógicas dos meus programas **:(**
 
 Então boa parte das lógicas que eu usava teriam que ser reformuladas para não mais rodar no famoso `if __name__ == '__main__`, e sim por chamada via função do meu HTML/JS a cada `ENTER` que dou no input.
 
+Se quiser ver o resultado, sinta-se a vontade de navegar nas pastas deste repositório e visitar suas respectivas páginas estáticas!  
+
+## Testando localmente
+
+Para testar localmente, será necessário rodar no terminal:  
+
+`py -m http.server`
+
+Depois abrir o navegador em:
+
+`http://localhost:8000/`
+
 ## Projetos futuros
 
 Por enquanto vou adaptando os códigos que gostaria de compartilhar, fazendo algumas melhorias visuais.  
 🎯 Mas vamos destacar o que gostaria de fazer:
 
-[ ] Já que comecei um CLI, vou melhorando aos poucos, tipo resgatar comandos anteriores apertando `↑`.
-[ ] Similar ao CLI, queria fazer um playtest em python para digitar um código de +5 linhas e rodar e ver o resultado
-[ ] Trazer meu mini-game de cartas chamado scouldrel que eu vi no youtube e recriei em python.
+- [ ] Já que comecei um CLI, vou melhorando aos poucos, tipo resgatar comandos anteriores apertando `↑`.
+- [ ] Similar ao CLI, queria fazer um playtest em python para digitar um código de +5 linhas e rodar e ver o resultado
+- [ ] Trazer meu mini-game de cartas chamado scouldrel que eu vi no youtube e recriei em python.

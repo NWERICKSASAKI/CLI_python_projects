@@ -11,6 +11,8 @@ async function init() {
     await pyodide.loadPackage("pandas");
     const code = await fetch("main.py").then(r => r.text())
     await pyodide.runPythonAsync(code);
+    input.removeAttribute("disabled");
+    input.focus();
 }
 
 function limpar_terminal(){
@@ -41,9 +43,10 @@ init();
 
 document.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
-    enviar();
-    input.value = ""
+        enviar();
+        input.value = ""
     }
+    input.focus();
 });
 
 // py -m http.server
