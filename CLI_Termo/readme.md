@@ -30,4 +30,4 @@ Dará pra perceber que boa parte do código foi reaproveitado mas parte da lógi
 * segundo, o `Colorama` que dava cores ao terminal teve que ser substituído por adaptações de tags HTML com classes para ter cores via CSS;
 * terceiro, a lógica original, como em qualquer *game engine* parte de um loop, tive que desfazer para adaptar o jogo rodar a partir de cada interação via "input" do HTML/JS.
 
-O resultado você pode visualizar na página estática ->
+O resultado você pode visualizar na [https://nwericksasaki.github.io/CLI_python_projects/CLI_Termo/](página estática)
