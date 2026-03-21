@@ -11,7 +11,10 @@ def converter_html_str(output):
     return re.sub('<.*?>','',output)
 
 if __name__ == '__main__':
-    print(converter_html_str(main.init()))
+    response = converter_html_str(main.init())
+    print(response)
+
     while True:
         entrada = input('->')
-        print(converter_html_str(main.receber_input(entrada)))
+        response = converter_html_str(main.receber_input(entrada))
+        print(response)

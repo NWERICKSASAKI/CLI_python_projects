@@ -26,10 +26,18 @@ Como estava precisando praticar um pouco mais de POO resolvi quebrar a **lógica
 
 ## A adaptação
 
-Dará pra perceber que boa parte do código foi reaproveitado mas parte da lógica e fluxo dos processos foram alterados no [main.py](main.py):
+🔧 Dará pra perceber que boa parte do código foi reaproveitado,  
+mas parte da lógica e fluxo dos processos foram alterados no [main.py](main.py):
 
-* primeiro o `print()` original eu sobrescrevi para poder gerar tags HTML para ser exibido no navegador;
+* primeiro o `print()` original eu "sobrescrevi" para poder gerar tags HTML para ser exibido no navegador;
 * segundo, o `Colorama` que dava cores ao terminal teve que ser substituído por adaptações de tags HTML com classes para ter cores via CSS;
 * terceiro, a lógica original, como em qualquer *game engine* parte de um loop, tive que desfazer para adaptar o jogo rodar a partir de cada interação via "input" do HTML/JS.
 
-O resultado você pode visualizar na [página estática](https://nwericksasaki.github.io/CLI_python_projects/CLI_Termo/)
+O resultado você pode visualizar na página estática:  
+<https://nwericksasaki.github.io/CLI_python_projects/CLI_Termo/>
+
+## Debug
+
+🪲 Como testar pelo navegador estava sendo extretamente desafiador, fiz um arquivo a parte [_cli.py](_cli.py) para poder testar e ir encontrando os erros e bugs do meu programa.  
+
+▶️ Ao executar o programa, ele devolve todos os outputs pro terminal python pelo `print()` original, retirando os tags HTML do `main.py`.
