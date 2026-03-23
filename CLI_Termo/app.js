@@ -7,9 +7,7 @@ async function init() {
     pyodide = await loadPyodide()
 
     await pyodide.loadPackage("micropip");
-
-    // p instalar bibliotecas
-    // ala `pip install Unidecode`
+        
     await pyodide.runPythonAsync(`
     import micropip
     await micropip.install("Unidecode")
@@ -23,28 +21,27 @@ async function init() {
     await pyodide.runPythonAsync(code);
 
     response = await pyodide.runPython(`init()`);
-    await to_output(response);
+    await get_output_and_update_front();
     input.removeAttribute("disabled");
     input.focus();
 }
 
-async function enviar(){
-    const entrada_usuario = input.value;
+async function enviar(entrada_usuario){
     pyodide.globals.set("entrada_usuario", entrada_usuario);
-    response = await pyodide.runPython(`receber_input(entrada_usuario)`);
-    await to_output(response);
-    console.log(response)
+    await pyodide.runPython(`termo.inserir_input(entrada_usuario)`);
+    await get_output_and_update_front();
 }
 
-async function to_output(str){
-    output.innerHTML = str
+async function get_output_and_update_front(){
+    response = await pyodide.runPython(`output`);
+    output.innerHTML = response;
 }
 
 init();
 
 document.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
-        enviar();
+        enviar(input.value);
         input.value = ""
     }
     input.focus();

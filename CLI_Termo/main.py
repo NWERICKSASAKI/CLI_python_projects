@@ -1,6 +1,39 @@
 import random
 from unidecode import unidecode
 
+
+output:str=''
+
+def print(*args, classe:str='', sep:str=' ', end:str='\n', insert_tag=True) -> None:
+    '''
+    Sobrepor a função original print() para converter todo output original
+    por uma saída HTML.
+    '''
+    global output
+
+    new_output = ''
+    if len(args) == 0:
+        new_output = end            
+    else:
+        string = str(args[0])
+        if len(args)>1:
+            string = sep.join(args)
+
+        if classe:
+            classe = f' class={classe}'
+
+        if insert_tag:
+            new_output = f'<span{classe}>{string}</span>{end}'
+        else:
+            new_output = f'{string}{end}'
+
+    output += new_output.replace('\n', '<br>')
+    return
+
+def cls():
+    global output
+    output = ''
+
 class Letra:
     def __init__(self, pos:int, palavra_resposta:str, letra_chutada=""):
         self.pos:int = pos
@@ -36,29 +69,6 @@ class Termo:
         self.exibicao:list[list] = []
         self.continuar = False
 
-        self.output_str:str = ''
-
-    def print(self, *args, classe:str='', sep:str=' ', end:str='</br>', insert_tag=True) -> None:
-        '''
-        Pseudo-sobrepor a função original print() para converter todo output original
-        por uma saída HTML.
-        '''
-        if len(args) == 0:
-            self.output_str += end
-            return
-
-        string = str(args[0])
-        if len(args)>1:
-            string = sep.join(args)
-
-        if classe:
-            classe = f' class={classe}'
-        if insert_tag:
-            self.output_str += f'<span{classe}>{string}</span>{end}'
-        else:
-            self.output_str += f'{string}{end}'
-        return
-
     def definir_seed(self, n:int):
         random.seed(n)
         self._seed = n
@@ -70,16 +80,17 @@ class Termo:
         self.exibicao:list[list] = []
 
     def exibir_tela(self):
-        self.output_str = ''
-        self.print("- TERMO -", end='</br></br>')
+        global output
+        cls()
+        print("- TERMO -", end='\n\n')
         for palavra in self.exibicao:
-            # self.print(palavra, insert_tag=False)
+            # print(palavra, insert_tag=False)
             for letra in palavra:
-                self.print(letra, end=' ', insert_tag=False)
-            self.print()
+                print(letra, end=' ', insert_tag=False)
+            print()
         for i in range(self.max_tentativas - self.tentativa):
-            self.print('_ '*self.n_letras)
-        return self.output_str
+            print('_ '*self.n_letras)
+        return output
 
     def entrada_tem_n_letras_certinho(self, entrada:str) -> bool:
         if not len(entrada)==self.n_letras:
@@ -105,26 +116,34 @@ class Termo:
         return False
     
     def encerrar(self):
-        self.print(f"\nPalavra secreta: {self.palavra_da_rodada.upper()}")
+        print(f"\nPalavra secreta: {self.palavra_da_rodada.upper()}")
         if len(self.lista_palavras) == 0:
-            self.print("VOCE ZEROU!!")
+            print("VOCE ZEROU!!")
             return False
-        self.print("Aperte [ENTER] para continuar.")
+        print("Aperte [ENTER] para continuar.")
         return True
 
     def ler_txt(self, nome_do_arquivo:str="5.txt") -> list:
         lista_palavras = []
-        with open(nome_do_arquivo, 'r', encoding='utf-8') as arquivo:
-            conteudo = arquivo.read()
-            for palavra in conteudo.split("\n"):
-                if len(palavra) == self.n_letras:
-                    lista_palavras.append(palavra)
+        try:
+            with open(nome_do_arquivo, 'r', encoding='utf-8') as arquivo:
+                conteudo = arquivo.read()
+                for palavra in conteudo.split("\n"):
+                    if len(palavra) == self.n_letras:
+                        lista_palavras.append(palavra)
+        except:
+            with open(f'CLI_Termo./{nome_do_arquivo}', 'r', encoding='utf-8') as arquivo:
+                conteudo = arquivo.read()
+                for palavra in conteudo.split("\n"):
+                    if len(palavra) == self.n_letras:
+                        lista_palavras.append(palavra)
         return lista_palavras
 
-    def inserir_input(self, input:str) -> str:
+    def nao_mais_loop_principal(self, input:str):
         if not self.continuar:
             self.nova_rodada()
             self.continuar = True
+        self.exibir_tela()
         entrada_valida = self.entrada_tem_n_letras_certinho(input)
         if entrada_valida:
             terminou = self.nova_tentativa(input)
@@ -132,24 +151,20 @@ class Termo:
             if terminou:
                 self.continuar = False
                 self.encerrar()
-                self.nova_rodada()
-            return self.output_str
-        return self.exibir_tela()
+                return
+        return
+    
+    def inserir_input(self, input:str):
+        self.nao_mais_loop_principal(input)
+
 
 termo:Termo|None = None
 
 def init():
     global termo
     termo = Termo(seed=0, max_tentativas=5, n_letras=5)
-    return termo.exibir_tela()
-
-def receber_input(string:str):
-    global termo
-    
-    if termo == None:
-        pass
-
-    return termo.inserir_input(string)
+    termo.exibir_tela()
+    return termo
 
 
 
