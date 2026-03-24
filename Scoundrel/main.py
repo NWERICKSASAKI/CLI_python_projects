@@ -300,21 +300,21 @@ class Game:
             
             Monstros agora te cercam.''')
             self.first_help = False
-            return True
-        self.last_message=dedent('''
-        Comandos aceitos:
-        "help" - para exibir este menu
-        "manual" - para exibir o manual do jogo
-        "avoid" - retira as cartas da sala e joga para o fim do baralho (só pode fugir se não interagir com a sala) (não pode fugir 2 vezes em seguida)
-        "pick 1" - escolha a posição da carta (entre 1 a 4) para pegar a poção de vida / arma 
-        "hand 1" - escolha a posição do monstro (entre 1 a 4) para enfrentá-lo usando as próprias mãos
-        "weapon 1" - escolha a posição do monstro (entre 1 a 4) para enfrentá-lo usando a sua arma
-        "enter" - entra em uma nova sala preenchendo com novas cartas (só pode entrar numa nova sala se pelo menos pegar 3 cartas)
-        "reset" - recomeça o mesmo jogo
-        "reset 123" - recomeça o jogo usando a seed inserida
+        else:
+            self.last_message=dedent('''
+            Comandos aceitos:
+            "help" - para exibir este menu
+            "manual" - para exibir o manual do jogo
+            "avoid" - retira as cartas da sala e joga para o fim do baralho (só pode fugir se não interagir com a sala) (não pode fugir 2 vezes em seguida)
+            "pick 1" - escolha a posição da carta (entre 1 a 4) para pegar a poção de vida / arma 
+            "hand 1" - escolha a posição do monstro (entre 1 a 4) para enfrentá-lo usando as próprias mãos
+            "weapon 1" - escolha a posição do monstro (entre 1 a 4) para enfrentá-lo usando a sua arma
+            "enter" - entra em uma nova sala preenchendo com novas cartas (só pode entrar numa nova sala se pelo menos pegar 3 cartas)
+            "reset" - recomeça o mesmo jogo
+            "reset 123" - recomeça o jogo usando a seed inserida
 
-        se quiser, você pode enviar só as iniciais, exemplo: "w 2" "p 3" "r 999" etc
-        ''')
+            se quiser, você pode enviar só as iniciais, exemplo: "w 2" "p 3" "r 999" etc
+            ''')
         return True
 
     def display_manual(self):
@@ -429,16 +429,6 @@ class Game:
         if auto:
             if len(self.room) <= 1:
                 self.enter_room()
-
-    # def _loop(self):
-    #     while self._game:
-    #         self._print_visual_state()
-    #         if self._check_dungeon_ended():
-    #             break
-    #         self.last_message = ''
-    #         command = input('Command: ')
-    #         self._do_command(command)
-    #     init()
 
     def _ex_loop(self, entrada_usuario):
         if not self._game:
