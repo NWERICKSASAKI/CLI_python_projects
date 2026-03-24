@@ -1,53 +1,11 @@
+from colorama import Fore
 import random
+import os
 from textwrap import dedent
 
 NAIPES = '♣︎♥︎♠︎♦︎'
 discrete = True
 seed = 0
-
-
-output:str=''
-
-def print(*args, classe:str='', sep:str=' ', end:str='\n', insert_tag=True) -> None:
-    '''
-    Sobrepor a função original print() para converter todo output original
-    por uma saída HTML.
-    '''
-    global output
-
-    new_output = ''
-    if len(args) == 0:
-        new_output = end            
-    else:
-        string = str(args[0])
-        if len(args)>1:
-            string = sep.join(args)
-
-        if classe:
-            classe = f' class={classe}'
-
-        if insert_tag:
-            new_output = f'<span{classe}>{string}</span>{end}'
-        else:
-            new_output = f'{string}{end}'
-
-    output += new_output.replace('\n', '<br>')
-    return
-
-def cls():
-    global output
-    output = ''
-
-
-class Cores():
-    LIGHTBLUE_EX = "<span class='LIGHTBLUE_EX'>"
-    LIGHTRED_EX = "<span class='LIGHTRED_EX'>"
-    YELLOW = "<span class='YELLOW'>"
-    GREEN = "<span class='GREEN'>"
-    RED = "<span class='RED'>"
-    WHITE = "</span>"
-
-Fore = Cores
 
 class Card:
 
@@ -57,7 +15,6 @@ class Card:
         self.value_str = self.get_value_str(value)
         self.naipe_str = self.get_naipe_str(naipe)
         self.color = self.get_color(naipe)
-        self.end_color = '</span>'
 
     def get_naipe_str(self, naipe:int) -> list[str]:
         match naipe:
@@ -117,7 +74,7 @@ class Game:
             self.last_message += msg + Fore.WHITE + '\n' 
 
     def _print_visual_state(self):
-        cls()
+        os.system('cls')
         global seed
         if discrete:
             print(f'S {seed}  |  D {len(self.dungeon)}  |  L {self.lp:02d}  |  W {self.weapon_monsters}')
@@ -441,52 +398,34 @@ class Game:
             if len(self.room) <= 1:
                 self.enter_room()
 
-    # def _loop(self):
-    #     while self._game:
-    #         self._print_visual_state()
-    #         if self._check_dungeon_ended():
-    #             break
-    #         self.last_message = ''
-    #         command = input('Command: ')
-    #         self._do_command(command)
-    #     init()
+    def _loop(self):
+        while self._game:
+            self._print_visual_state()
+            if self._check_dungeon_ended():
+                break
+            self.last_message = ''
+            command = input('Command: ')
+            self._do_command(command)
+        init()
 
-    def _ex_loop(self, entrada_usuario):
-        if not self._game:
-            init()
-        if self._check_dungeon_ended():
-            return
-        self.last_message = ''
-        self._do_command(entrada_usuario)
-        self._print_visual_state()
-
-    def inserir_input(self, entrada_usuario:str):
-        self._ex_loop(entrada_usuario)
-
-g = None
 
 def init():
     print(Fore.WHITE+'Modo discreto? (Digite "S" ou "N")')
     global discrete
     global seed
-    global g
     random.seed(seed)
-    # d_input = input()
-    discrete = False
-    # if d_input.upper() == 'N':
-    #     discrete = False
-    # else:
-    #     discrete = True
+    d_input = input()
+    if d_input.upper() == 'N':
+        discrete = False
+    else:
+        discrete = True
     g = Game()
     g._new_dungeon()
     g._shuffle_dungeon()
     g.enter_room()
-    g._print_visual_state()
-    # g._loop()
+    g._loop()
 
 if __name__ == '__main__':
     seed = random.randint(1,999)
     random.seed(seed)
     init()
-
-# py -m http.server

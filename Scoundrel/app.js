@@ -13,10 +13,6 @@ async function init() {
     await micropip.install("Unidecode")
     `);
 
-    // p inserir o arquivo local ao diretorio (local) do python
-    const texto = await fetch("5.txt").then(r => r.text());
-    pyodide.FS.writeFile("5.txt", texto);
-
     const code = await fetch("main.py").then(r => r.text())
     await pyodide.runPythonAsync(code);
 
@@ -28,7 +24,7 @@ async function init() {
 
 async function enviar(entrada_usuario){
     pyodide.globals.set("entrada_usuario", entrada_usuario);
-    await pyodide.runPython(`termo.inserir_input(entrada_usuario)`);
+    await pyodide.runPython(`g.inserir_input(entrada_usuario)`);
     await get_output_and_update_front();
 }
 
