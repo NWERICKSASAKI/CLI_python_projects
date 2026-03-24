@@ -39,6 +39,7 @@ def cls():
     output = ''
 
 
+# Override do Fore
 class Cores():
     LIGHTBLUE_EX = "<span class='LIGHTBLUE_EX'>"
     LIGHTRED_EX = "<span class='LIGHTRED_EX'>"
@@ -124,7 +125,7 @@ class Game:
             print(f'\nR {self.room}\n')
         else:
             print(f'Seed {seed}  |  Dungeon {len(self.dungeon)} / 40  |'+ Fore.YELLOW +f'  HP {self.lp:02d} / 20  ' + Fore.WHITE + f'|  Weapon: {self.weapon_monsters}')
-            print('\n  1    2    3    4')
+            print('\n. 1 .. 2 .. 3 .. 4 .')
             print(f'{self.room}\n')
         print(self.last_message)
         return 
