@@ -22,6 +22,6 @@ Bom funciona **\o/**
 mas só se acrescenter no JS o código `await pyodide.loadPackage("pandas");`  
 
 Se quiser ver o resultado, só visitar a página estática:
-<https://nwericksasaki.github.io/CLI_python_projects/CLI_PlayTest/>
+<https://nwericksasaki.github.io/CLI_python_projects/CLI/>
 
 ...depois formulo mais este readme...

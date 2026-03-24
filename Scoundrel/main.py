@@ -2,7 +2,6 @@ import random
 from textwrap import dedent
 
 NAIPES = '♣︎♥︎♠︎♦︎'
-discrete = True
 seed = 0
 
 
@@ -75,27 +74,20 @@ class Card:
             case _: return ''
     
     def __str__(self):
-        if not discrete:
-            return f"{self.color}{self.naipe_str[0]} {self.value_str[0]}{Fore.WHITE}"
-        else:
-            return f"{self.naipe_str[1]}{self.value_str[1]}"
+        return f"{self.color}{self.naipe_str[0]} {self.value_str[0]}{Fore.WHITE}"
+
 
     def __repr__(self):
-        if not discrete:
-            return f"{self.color}{self.naipe_str[0]} {self.value_str}{Fore.WHITE}"
-        else:
-            return f"{self.naipe_str[1]}{self.value_str}"
+        return f"{self.color}{self.naipe_str[0]} {self.value_str}{Fore.WHITE}"
+
 
     def get_value_str(self, value):
-        if discrete:
-            return f'{value}'
-        else:
-            match value:
-                case 11: return 'J'
-                case 12: return 'Q'
-                case 13: return 'K'
-                case 14: return 'A'
-                case _: return str(value)
+        match value:
+            case 11: return 'J'
+            case 12: return 'Q'
+            case 13: return 'K'
+            case 14: return 'A'
+            case _: return str(value)
 
 
 class Game:
@@ -112,21 +104,14 @@ class Game:
         self.last_message = ''
 
     def dprint(self, msg, dmsg='FORBIDDEN'):
-        if discrete:
-            self.last_message += dmsg + Fore.WHITE + '\n'
-        else:
-            self.last_message += msg + Fore.WHITE + '\n' 
+        self.last_message += msg + Fore.WHITE + '\n' 
 
     def _print_visual_state(self):
         cls()
         global seed
-        if discrete:
-            print(f'S {seed}  |  D {len(self.dungeon)}  |  L {self.lp:02d}  |  W {self.weapon_monsters}')
-            print(f'\nR {self.room}\n')
-        else:
-            print(f'Seed {seed}  |  Dungeon {len(self.dungeon)} / 40  |'+ Fore.YELLOW +f'  HP {self.lp:02d} / 20  ' + Fore.WHITE + f'|  Weapon: {self.weapon_monsters}')
-            print('\n. 1 .. 2 .. 3 .. 4 .')
-            print(f'{self.room}\n')
+        print(f'Seed {seed}  |  Dungeon {len(self.dungeon)} / 40  |'+ Fore.YELLOW +f'  HP {self.lp:02d} / 20  ' + Fore.WHITE + f'|  Weapon: {self.weapon_monsters}')
+        print('\n. 1 .. 2 .. 3 .. 4 .')
+        print(f'{self.room}\n')
         print(self.last_message)
         return 
 
@@ -317,7 +302,6 @@ class Game:
         "hand 1" - escolha a posição do monstro (entre 1 a 4) para enfrentá-lo usando as próprias mãos
         "weapon 1" - escolha a posição do monstro (entre 1 a 4) para enfrentá-lo usando a sua arma
         "enter" - entra em uma nova sala preenchendo com novas cartas (só pode entrar numa nova sala se pelo menos pegar 3 cartas)
-        "discrete" -  alterna o formato de exibição de texto do terminal
         "reset" - recomeça o mesmo jogo
         "reset 123" - recomeça o jogo usando a seed inserida
 
@@ -399,7 +383,6 @@ class Game:
         return True
 
     def _do_command(self, command):
-        global discrete
         list_commands = command.lower().strip().split(' ')
         match list_commands[0]:
             case 'help':
@@ -414,9 +397,6 @@ class Game:
                 return self.pick_fight(list_commands)
             case 'enter' | 'e' :
                 return self.enter_room()
-            case 'discrete' | 'd':
-                discrete = not discrete
-                return True
             case 'reset' | 'restart' | 'r':
                 return self.reset_game(list_commands)
             case 'manual' | 'm':
@@ -467,17 +447,9 @@ class Game:
 g = None
 
 def init():
-    print(Fore.WHITE+'Modo discreto? (Digite "S" ou "N")')
-    global discrete
     global seed
     global g
     random.seed(seed)
-    # d_input = input()
-    discrete = False
-    # if d_input.upper() == 'N':
-    #     discrete = False
-    # else:
-    #     discrete = True
     g = Game()
     g._new_dungeon()
     g._shuffle_dungeon()

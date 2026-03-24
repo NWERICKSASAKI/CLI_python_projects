@@ -34,7 +34,7 @@ mas parte da lógica e fluxo dos processos foram alterados no [main.py](main.py)
 * terceiro, a lógica original, como em qualquer *game engine* parte de um loop, tive que desfazer para adaptar o jogo rodar a partir de cada interação via "input" do HTML/JS.
 
 O resultado você pode visualizar na página estática:  
-<https://nwericksasaki.github.io/CLI_python_projects/CLI_Termo/>
+<https://nwericksasaki.github.io/CLI_python_projects/Termo/>
 
 ## Debug
 
