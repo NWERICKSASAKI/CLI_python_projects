@@ -102,6 +102,7 @@ class Game:
         self.can_avoid = 1
         self._game = True
         self.last_message = ''
+        self.first_help = False
 
     def dprint(self, msg, dmsg='FORBIDDEN'):
         self.last_message += msg + Fore.WHITE + '\n' 
@@ -293,6 +294,13 @@ class Game:
 
 
     def display_help(self):
+        if not self.first_help:
+            self.last_message = dedent('''Seu pleito de ajuda não foi atendido,
+            Mas certamente não passou desapercebido.
+            
+            Monstros agora te cercam.''')
+            self.first_help = True
+            return True
         self.last_message=dedent('''
         Comandos aceitos:
         "help" - para exibir este menu
