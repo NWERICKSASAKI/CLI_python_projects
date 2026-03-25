@@ -1,5 +1,4 @@
 import random
-from textwrap import dedent
 
 NAIPES = '♣︎♥︎♠︎♦︎'
 seed = 0
@@ -295,13 +294,13 @@ class Game:
 
     def display_help(self):
         if self.first_help:
-            self.last_message = dedent('''Seu pleito de ajuda não foi atendido,
+            self.last_message = '''Seu pleito de ajuda não foi atendido,
             Mas certamente não passou desapercebido.
             
-            Monstros agora te cercam.''')
+            Monstros agora te cercam.'''
             self.first_help = False
         else:
-            self.last_message=dedent('''
+            self.last_message='''
             Comandos aceitos:
             "help" - para exibir este menu
             "manual" - para exibir o manual do jogo
@@ -314,7 +313,7 @@ class Game:
             "reset 123" - recomeça o jogo usando a seed inserida
 
             se quiser, você pode enviar só as iniciais, exemplo: "w 2" "p 3" "r 999" etc
-            ''')
+            '''
         return True
 
     def display_manual(self):
