@@ -18,13 +18,13 @@ def executar_codigo(codigo):
             exec(codigo, contexto)
     except Exception as e:
         if 'is included in the Pyodide' in str(e):
-            return 'Utilize "pip install nome_do_pacote" para depois importá-la'
+            return '<div class="custom_output">Utilize "pip install nome_do_pacote" para depois importá-la</div>'
         elif 'No module named' in str(e):
-            return 'Utilize "pip install nome_do_pacote" para depois importá-la'
-        return f"Error: {str(e)}\n"
+            return '<div class="custom_output">Utilize "pip install nome_do_pacote" para depois importá-la</div>'
+        return f'<div class="custom_output">Error: {str(e)}</div>'
     finally:
         sys.stdout = old_stdout
-    return buffer.getvalue()
+    return f'<div class="output">{buffer.getvalue()}</div>'
 
 
 def receber_input(string:str):

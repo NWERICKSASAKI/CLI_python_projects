@@ -15,17 +15,17 @@ async function init() {
     await pyodide.runPythonAsync(code);
     input.removeAttribute("disabled");
     input.focus();
-    output.innerText=''
+    output.innerHTML=''
 }
 
 function limpar_terminal(){
-    document.getElementById("output").innerText = ''
+    document.getElementById("output").innerHTML = ''
 }
 
 async function enviar(){
 
     const codigo = input.value;
-    let texto_output = codigo + '\n' 
+    output.innerHTML+=`<div class="input">${codigo}</div>`
 
     // Comandos fixos
     if (codigo in palavras_reservadas){
@@ -47,37 +47,36 @@ async function enviar(){
 
     const resultado = pyodide.runPython(`executar_codigo(codigo)`);
     if (resultado.length > 0){
-        texto_output += resultado
+        output.innerHTML += resultado
     }
-    output.innerText += texto_output;
 }
 
 async function instalar_pacote(pacote) {
     success = false;
     error_log = '';
-    output.innerText += `Instalando pacote ${pacote}...\n`
+    output.innerHTML += `<div class="custom_output">Instalando pacote ${pacote}...</div>`
 
     try {
         await pyodide.loadPackage(pacote);
-        output.innerText += `Pacote ${pacote} instalado com sucesso!\n`
+        output.innerHTML += `<div class="custom_output">Pacote ${pacote} instalado com sucesso!</div>`
         success = true;
         return;
     } catch (error) {
-        error_log += `Erro ao carregar o pacote ${pacote} com loadPackage: ${error}\n`
+        error_log += `<div class="custom_output">Erro ao carregar o pacote ${pacote} com loadPackage: ${error}</div>`
     }
 
     if (!success){
         try {
             await pyodide.runPythonAsync(`await micropip.install("${pacote}")`);
-            output.innerText += `Pacote ${pacote} instalado com sucesso!\n`
+            output.innerHTML += `<div class="custom_output">Pacote ${pacote} instalado com sucesso!</div>`
             success = true;
             return;
         } catch (error) {
-            error_log += `Erro ao instalar o pacote ${pacote} com micropip: ${error}\n`
+            error_log += `<div class="custom_output">Erro ao instalar o pacote ${pacote} com micropip: ${error}</div>`
         }
     }
 
-    output.innerText += error_log;
+    output.innerHTML += error_log;
 }
 
 init();
