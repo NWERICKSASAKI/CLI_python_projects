@@ -17,7 +17,11 @@ def executar_codigo(codigo):
         except:
             exec(codigo, contexto)
     except Exception as e:
-        return f"Erro: {e}\n"
+        if 'is included in the Pyodide' in str(e):
+            return 'Utilize "pip install nome_do_pacote" para depois importá-la'
+        elif 'No module named' in str(e):
+            return 'Utilize "pip install nome_do_pacote" para depois importá-la'
+        return f"Error: {str(e)}\n"
     finally:
         sys.stdout = old_stdout
     return buffer.getvalue()
