@@ -144,6 +144,8 @@ class Termo:
             self.nova_rodada()
             self.continuar = True
         self.exibir_tela()
+        input = input.strip()
+        input = unidecode(input)
         entrada_valida = self.entrada_tem_n_letras_certinho(input)
         if entrada_valida:
             terminou = self.nova_tentativa(input)
