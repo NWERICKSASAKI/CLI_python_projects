@@ -2,7 +2,8 @@ let pyodide;
 const input = document.getElementById("input")
 const output = document.getElementById("output")
 const palavras_reservadas = {
-    'cls':limpar_terminal
+    'cls':limpar_terminal,
+    'history':()=>{output.innerHTML += inputs.map(i => `<div class="output">${i}</div>`).join('')},
 }
 const inputs=['']
 let input_index = -1;
