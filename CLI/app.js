@@ -4,6 +4,8 @@ const output = document.getElementById("output")
 const palavras_reservadas = {
     'cls':limpar_terminal
 }
+const inputs=['']
+let input_index = -1;
 
 async function init() {
     pyodide = await loadPyodide()
@@ -25,6 +27,7 @@ function limpar_terminal(){
 async function enviar(){
 
     const codigo = input.value;
+    inputs.push(codigo)
     output.innerHTML+=`<div class="input">${codigo}</div>`
 
     // Comandos fixos
@@ -85,7 +88,21 @@ document.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         enviar();
         input.value = ""
+    } else if (event.key === "ArrowUp") {
+        if (inputs.length > 0){
+            input_index = (input_index + 1) % inputs.length;
+            input.value = inputs[input_index];
+        }
+    } else if (event.key === "ArrowDown") {
+        if (inputs.length > 0){
+            input_index = (input_index - 1) % inputs.length;
+            if (input_index < 0){
+                input_index = inputs.length - 1;
+            }
+            input.value = inputs[input_index];
+        }
     }
+
     input.focus();
 });
 
