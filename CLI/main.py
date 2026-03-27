@@ -24,7 +24,9 @@ def executar_codigo(codigo):
         return f'<div class="custom_output">Error: {str(e)}</div>'
     finally:
         sys.stdout = old_stdout
-    return f'<div class="output">{buffer.getvalue()}</div>'
+    saida:str = buffer.getvalue()
+    saida = saida.replace('<', '&lt;').replace('>', '&gt;')
+    return f'<div class="output" style="white-space: pre-wrap;">{saida}</div>'
 
 
 def receber_input(string:str):
