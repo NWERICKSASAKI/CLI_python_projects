@@ -1,0 +1,15 @@
+.input{
+    color : #cccccc;
+}
+
+.output{
+    color: yellow;
+}
+
+.custom_output{
+    color: orange;
+}
+
+h1{
+    margin-bottom: 10px;
+}

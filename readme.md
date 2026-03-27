@@ -40,6 +40,7 @@ Depois abrir o navegador em:
 Por enquanto vou adaptando os códigos que gostaria de compartilhar, fazendo algumas melhorias visuais.  
 🎯 Mas vamos destacar o que gostaria de fazer:
 
-- [ ] Já que comecei um CLI, vou melhorando aos poucos, tipo resgatar comandos anteriores apertando `↑`.
+- [x] Já que comecei um CLI, vou melhorando aos poucos, tipo resgatar comandos anteriores apertando `↑`.
 - [ ] Similar ao CLI, queria fazer um playtest em python para digitar um código de +5 linhas e rodar e ver o resultado
-- [ ] Trazer meu mini-game de cartas chamado scouldrel que eu vi no youtube e recriei em python.
+- [ ] (tentar) Fazer algo similar ao Jupyther notebook.
+- [x] Trazer meu mini-game de cartas chamado scouldrel que eu vi no youtube e recriei em python.
