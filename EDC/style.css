@@ -1,15 +1,9 @@
-.input{
-    color : #cccccc;
+.install_cli{
+    display: flex;
+    margin: 10px 0;
 }
 
-.output{
-    color: yellow;
+.install_cli input{
+    margin: 0 10px;
 }
 
-.custom_output{
-    color: orange;
-}
-
-h1{
-    margin-bottom: 10px;
-}
