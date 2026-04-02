@@ -164,7 +164,7 @@ termo:Termo|None = None
 
 def init():
     global termo
-    termo = Termo(seed=0, max_tentativas=5, n_letras=5)
+    termo = Termo(seed=0, max_tentativas=6, n_letras=5)
     termo.exibir_tela()
     return termo
 
