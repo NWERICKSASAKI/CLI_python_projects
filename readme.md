@@ -10,7 +10,9 @@
 
 ⚙️ Tudo funciona numa página estática HTML + JS + CSS, usando o pyodide ele interpreta o meu código python e roda as funções isoladamentes a cada `ENTER` que dou no programa e interpreta o `input` e retorna o resultado do python (adaptado em uma string com elementos HTML para renderizar).  
 
-😓 Porém eu fui estudando um pouco mais do **pyodide** e seus potenciais eu acabei divergindo do meu objetivo original de só rodar meus programas e acabei criando este simulador de CLI em Python → [CLI_PlayTest](/CLI_PlayTest)
+😓 Porém eu fui estudando um pouco mais do **pyodide** e seus potenciais eu acabei divergindo do meu objetivo original de só rodar meus programas e acabei criando este simulador de CLI em Python → [CLI_PlayTest](/[CLI_PlayTest](https://nwericksasaki.github.io/CLI_python_projects/CLI/))
+
+> <https://nwericksasaki.github.io/CLI_python_projects/> < 
 
 ## Adaptando para meus outros programas
 
